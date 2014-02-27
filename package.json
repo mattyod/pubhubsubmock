@@ -1,0 +1,17 @@
+{
+  "name": "PubHubSubMock",
+  "description": "A simple Node.js PubSuubHubBub mock server",
+  "version": "0.0.1",
+  "author": {
+      "name": "Matthew O'Donoghue"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "request": "2.34.0",
+    "jade": "1.1.5",
+    "underscore": "1.6.0"
+  }
+}

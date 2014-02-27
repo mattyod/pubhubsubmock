@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Pubsubhub Mock
+  p feeds:
+  ul
+    each feed in feeds
+      li
+        a(href='publish/' + feed)= feed
