@@ -22,6 +22,8 @@ Once you have a subscriber simply click on a link one of your feed files and it 
 
 **TODO**
 
+Discovery.
 Subscription verification is not yet in place.
+Unsubscribing.
 
 Other things too.
