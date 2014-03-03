@@ -4,7 +4,8 @@
 var fs = require('fs'),
     http = require('http'),
     sign = require('../lib/sign'),
-    _ = require('underscore');
+    _ = require('underscore'),
+    col = require('col');
 
 module.exports = function (req, res) {
   var subscriber;
@@ -14,11 +15,12 @@ module.exports = function (req, res) {
   };
 
   var response = function (res) {
-    console.log('Feed received successfully.');
-    console.log(res.statusCode);
+    col.success('Feed received successfully.');
+    col.success('Status code: ' + res.statusCode);
+    col.success('Headers:');
     console.log(res.headers);
     res.on('data', function (chunk) {
-      console.log(chunk.toString());
+      col.success('body: ' + chunk.toString());
     });
   };
 
@@ -75,10 +77,10 @@ module.exports = function (req, res) {
   var getConfig = function () {
     fs.readFile('./config.json', 'utf8', function (err, file) {
       if (err) {
-        console.log('no config file found using defaults.');
+        col.error('no config file found using defaults.');
       } else {
         _.extend(config, JSON.parse(file));
-        console.log('applied local config:');
+        col.success('applied local config:');
         console.log(config);
       }
 

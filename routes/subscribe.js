@@ -1,12 +1,15 @@
 'use strict';
 
-var fs = require('fs');
+var fs = require('fs'),
+    col = require('col');
 
 module.exports = function (req, res) {
 
   fs.writeFile('./database.txt', JSON.stringify(req.body), function () {
-    console.log('written to database.txt:');
-    console.log(req.body);
+    var message = req.body;
+    message.secret = 'xxxxxxxxxx';
+    col.success('Subscriber received and written to database.txt:');
+    console.log(message);
   });
 
   res.send(202, 'Subscription accepted');
