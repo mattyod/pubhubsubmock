@@ -7,7 +7,7 @@ var fs = require('fs'),
     _ = require('underscore'),
     col = require('col');
 
-module.exports = function (req, res) {
+module.exports = function (req, res, next) {
   var subscriber;
   var config = {
     method: 'POST',
@@ -41,10 +41,12 @@ module.exports = function (req, res) {
       reqObj.port = url[1];
     }
 
+    console.log('making request:', reqObj);
+
     var req = http.request(reqObj, response);
 
     req.on('error', function (error) {
-      console.log('problem with request: ' + error);
+      next(error);
     });
 
     req.write(feed);
