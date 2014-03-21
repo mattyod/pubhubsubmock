@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |config, override|
     override.vm.box = "opscode-ubuntu-12.04"
     override.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box"
-    override.vm.network :forwarded_port, host: 9000, guest: 9000
+    override.vm.network :forwarded_port, host: 9100, guest: 9100
     config.customize ["modifyvm", :id, "--memory", 512]
   end
 

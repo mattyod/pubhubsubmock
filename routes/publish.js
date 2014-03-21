@@ -2,17 +2,13 @@
 /*globals require, module, console */
 
 var fs = require('fs'),
-    http = require('http'),
+    request = require('request'),
     sign = require('../lib/sign'),
     _ = require('underscore'),
     col = require('col');
 
 module.exports = function (req, res, next) {
   var subscriber;
-  var config = {
-    method: 'POST',
-    'Content-Type': 'atom.xml'
-  };
 
   var response = function (res) {
     col.success('Feed received successfully.');
@@ -25,33 +21,25 @@ module.exports = function (req, res, next) {
   };
 
   var sendFeed = function (feed) {
-    var reqObj = {
+    var req = request({
       method: 'POST',
+      url: subscriber.callback,
       headers: {
         'Content-Type': 'atom/xml',
         'X-Hub-Signature': sign(feed, subscriber.secret)
-      }
-    };
-
-    var url = subscriber.callback.split(/\:(?=\d*$)/);
-
-    reqObj.url = url[0];
-
-    if (url[1]) {
-      reqObj.port = url[1];
-    }
-
-    console.log('making request:', reqObj);
-
-    var req = http.request(reqObj, response);
-
-    req.on('error', function (error) {
-      next(error);
+      },
+      body: feed
     });
 
-    req.write(feed);
-    req.end();
-    res.redirect('/');
+    req.on('response', function (resp) {
+      response(resp);
+      res.redirect('/');
+    });
+
+    req.on('error', function (err) {
+      next(err);
+    });
+
   };
 
   var getFeed = function () {
@@ -76,20 +64,6 @@ module.exports = function (req, res, next) {
     });
   };
 
-  var getConfig = function () {
-    fs.readFile('./config.json', 'utf8', function (err, file) {
-      if (err) {
-        col.error('no config file found using defaults.');
-      } else {
-        _.extend(config, JSON.parse(file));
-        col.success('applied local config:');
-        console.log(config);
-      }
-
-      getDatabase();
-    });
-  };
-
-  getConfig();
+  getDatabase();
 
 };

@@ -9,9 +9,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.4.0",
+    "express": "3.5.0",
     "request": "2.34.0",
-    "jade": "1.1.5",
+    "jade": "1.3.0",
     "underscore": "1.6.0",
     "col": "0.0.4"
   }

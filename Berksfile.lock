@@ -1,5 +1,8 @@
 {
   "sources": {
+    "java": {
+      "locked_version": "1.21.2"
+    },
     "npm": {
       "locked_version": "0.1.2"
     },
