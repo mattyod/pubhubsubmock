@@ -1,7 +1,7 @@
 {
   "name": "PubHubSubMock",
   "description": "A simple Node.js PubSuubHubBub mock server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Matthew O'Donoghue"
   },

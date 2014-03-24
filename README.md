@@ -18,12 +18,19 @@ Now you can subscribe to to the mock as you would a normal PubSubHubServer. Your
 
 Once you have a subscriber simply click on a link one of your feed files and it will be published.
 
-**N.B.** Your subscription request will be stored in a plain text file called database.txt at root. Don't use a real secret in here.
+**N.B.** Your subscription request will be stored in a plain text file called database.txt at project root. Don't use a real secret in here.
+
+**N.B.** If you wish to run this within a VM using the VagrantFile you will need the Berkshelf and omnibus plugins installed. Then you should be able to just:
+
+```
+vagrant up
+```
 
 **TODO**
 
 Discovery.
 Subscription verification is not yet in place.
 Unsubscribing.
+More detailed Readme.
 
 Other things too.
